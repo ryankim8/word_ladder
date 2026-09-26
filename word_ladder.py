@@ -36,6 +36,8 @@ def word_ladder(start_word, end_word, dictionary_file=dictionary_file):
     HINT:
     See <https://github.com/mikeizbicki/cmc-csci046/issues/472> for a discussion about a common memory management bug that causes the generated word ladders to be too long in some cases.
     '''
+    if start_word == end_word:
+        return [start_word]
     stack = deque([start_word])
     word_dict = dictionary_file[:]
     if start_word in word_dict:
