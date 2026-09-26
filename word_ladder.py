@@ -38,7 +38,8 @@ def word_ladder(start_word, end_word, dictionary_file=dictionary_file):
     '''
     stack = deque([start_word])
     word_dict = dictionary_file[:]
-    word_dict.remove(start_word)
+    if start_word in word_dict:
+        word_dict.remove(start_word)
 
     queue = deque()
     queue.append(stack)
@@ -46,7 +47,7 @@ def word_ladder(start_word, end_word, dictionary_file=dictionary_file):
     while queue:
         temp_stack = queue.popleft()
         temp_word = temp_stack[-1]
-        for x in word_dict:
+        for x in word_dict[:]:
             if _adjacent(temp_word, x):
                 if x == end_word:
                     temp_stack.append(x)
