@@ -5,6 +5,7 @@ from collections import deque
 with open('words5.dict', 'r') as f:
     dictionary_file = [word.strip().lower() for word in f.readlines()]
 
+
 def word_ladder(start_word, end_word, dictionary_file=dictionary_file):
     '''
     Returns a list satisfying the following properties:
@@ -55,6 +56,7 @@ def word_ladder(start_word, end_word, dictionary_file=dictionary_file):
                 dictionary_file.remove(x)
     return None
 
+
 def verify_word_ladder(ladder):
     '''
     Returns True if each entry of the input list is adjacent to its neighbors;
@@ -66,7 +68,7 @@ def verify_word_ladder(ladder):
     False
     '''
     for i in range(len(ladder)-1):
-        if _adjacent(ladder[i], ladder[i+1]) == False:
+        if not _adjacent(ladder[i], ladder[i+1]):
             return False
     return True
 
@@ -89,7 +91,7 @@ def _adjacent(word1, word2):
     difference = 0
     for i in range(len(word1)):
         if word1[i] != word2[i]:
-            difference +=1
+            difference += 1
         if difference > 1:
             return False
     return True
