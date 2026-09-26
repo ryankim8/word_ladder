@@ -96,4 +96,4 @@ def _adjacent(word1, word2):
             difference += 1
         if difference > 1:
             return False
-    return True
+    return difference == 1
