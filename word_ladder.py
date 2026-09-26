@@ -37,6 +37,8 @@ def word_ladder(start_word, end_word, dictionary_file=dictionary_file):
     See <https://github.com/mikeizbicki/cmc-csci046/issues/472> for a discussion about a common memory management bug that causes the generated word ladders to be too long in some cases.
     '''
     stack = deque([start_word])
+    word_dict = dictionary_file[:]
+    word_dict.remove(start_word)
 
     queue = deque()
     queue.append(stack)
@@ -44,7 +46,7 @@ def word_ladder(start_word, end_word, dictionary_file=dictionary_file):
     while queue:
         temp_stack = queue.popleft()
         temp_word = temp_stack[-1]
-        for x in dictionary_file:
+        for x in word_dict:
             if _adjacent(temp_word, x):
                 if x == end_word:
                     temp_stack.append(x)
@@ -53,7 +55,7 @@ def word_ladder(start_word, end_word, dictionary_file=dictionary_file):
                 stack_copy.append(x)
                 queue.append(stack_copy)
                 # print(queue)
-                dictionary_file.remove(x)
+                word_dict.remove(x)
     return None
 
 
@@ -67,8 +69,8 @@ def verify_word_ladder(ladder):
     >>> verify_word_ladder(['stone', 'shone', 'phony'])
     False
     '''
-    if ladder is None:
-        return True
+    if ladder is None or len(ladder) == 0:
+        return False
     for i in range(len(ladder) - 1):
         if not _adjacent(ladder[i], ladder[i + 1]):
             return False
